@@ -107,7 +107,7 @@ public class Solution {
 		}
 	}
 
-	static public Solution loadSolutionById(Connection conn, int id) throws SQLException {
+	static public Solution loadById(Connection conn, int id) throws SQLException {
 		String sql = "SELECT * FROM Solution where id=?";
 		PreparedStatement preparedStatement;
 		preparedStatement = conn.prepareStatement(sql);
@@ -126,7 +126,7 @@ public class Solution {
 		return null;
 	}
 
-	static public Solution[] loadAllSolutions(Connection conn) throws SQLException {
+	static public Solution[] loadAll(Connection conn) throws SQLException {
 		ArrayList<Solution> solutions = new ArrayList<Solution>();
 		String sql = "SELECT * FROM Solution";
 		PreparedStatement preparedStatement;
@@ -202,16 +202,27 @@ public class Solution {
 		}
 	}
 	
-	public Solution[] loadAll(int limit) throws SQLException{
-		Connection conn=DbUtil.getConn();
-		Solution[] allSolutions = loadAllSolutions(conn);
-		ArrayList<Solution> solutions = new ArrayList<Solution>();
-		for(int i=allSolutions.length-1-limit; i>allSolutions.length-1; i++){
-			solutions.add(allSolutions[i]);
+	public Solution[] loadAll(Connection conn, int limit) throws SQLException{
+	
+		Solution[] solutions = new Solution[limit];
+		String sql = "SELECT * FROM Solution ORDER BY created DESC LIMIT ?";
+		PreparedStatement preparedStatement;
+		preparedStatement = conn.prepareStatement(sql);
+		preparedStatement.setInt(1, limit);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		int i = 0;
+		while (resultSet.next()) {
+			Solution loadedSolution = new Solution();
+			loadedSolution.id = resultSet.getInt("id");
+			loadedSolution.created = resultSet.getString("created");
+			loadedSolution.updated = resultSet.getString("updated");
+			loadedSolution.description = resultSet.getString("description");
+			loadedSolution.exercise_id = resultSet.getInt("exercise_id");
+			loadedSolution.users_id = resultSet.getInt("users_id");
+			solutions[i] = loadedSolution;
+			i++;
 		}
-		Solution[] result = new Solution[limit];
-		result = solutions.toArray(result);
-		return result;
+		return solutions;
 	}
 
 }

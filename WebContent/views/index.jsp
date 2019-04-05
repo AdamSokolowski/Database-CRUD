@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>SOLUTIONS</h1>
 	<table border="1">
 	  <thead>
 	  	<tr>

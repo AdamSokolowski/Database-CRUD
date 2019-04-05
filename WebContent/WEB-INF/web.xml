@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>Servlet1</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Database-CRUD</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,7 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
+    <servlet>
     <servlet-name>Servlet13</servlet-name>
     <servlet-class>pl.coderslab.Servlet13</servlet-class>
   </servlet>
@@ -18,7 +18,7 @@
     <servlet-class>pl.coderslab.Servlet22</servlet-class>
     <init-param>
       <param-name>myParam</param-name>
-      <param-value>&quot;coderslab.pl&quot;</param-value>
+      <param-value>"coderslab.pl"</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -34,7 +34,7 @@
     <servlet-class>pl.coderslab.Servlet24</servlet-class>
     <init-param>
       <param-name>applicationName</param-name>
-      <param-value>&quot;MyApplicationName&quot;</param-value>
+      <param-value>"MyApplicationName"</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -54,5 +54,4 @@
 <param-name>number-solutions</param-name>
 <param-value>5</param-value>
 </context-param>
-  
 </web-app>
