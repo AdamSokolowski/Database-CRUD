@@ -13,43 +13,38 @@ import javax.servlet.http.HttpServletResponse;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Solution;
 
-/**
- * Servlet implementation class ServletStronyStartowej
- */
-@WebServlet("/")
-public class ServletStronyStartowej extends HttpServlet {
+@WebServlet("/addTestSolution")
+public class addTestSolution extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
-    public ServletStronyStartowej() {
-
+    public addTestSolution() {
+        super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Solution solution = new Solution();
-		
-		int numberSolutions = Integer.parseInt(getServletContext().getInitParameter("number-solutions"));
+		Solution solution = new Solution("test solution description", 1, 1);
+		int id;
 		try {
 			Connection conn = DbUtil.getConn();
-			Solution[] solutions = solution.loadAll(conn, numberSolutions);
+			id = solution.saveToDB(conn);
+			solution = Solution.loadById(conn, id);
 			conn.close();
+			Solution[] solutions = new Solution[1];
+			solutions[0]=solution;
 			request.setAttribute("solutions", solutions);
-			String title = "Most recent solutions";
+			String title = "Added Solution";
 			request.setAttribute("title", title);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/views/index.jsp").forward(request, response);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		getServletContext().getRequestDispatcher("/views/index.jsp").forward(request, response);		
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		
 	}
 
 }

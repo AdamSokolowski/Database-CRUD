@@ -1,0 +1,19 @@
+nav {
+	height: 50px;
+	
+}
+
+nav ul li{
+	list-style-type: none;
+	width: 180px;
+	float: left;
+	text-align: center;
+}
+
+nav ul li a{
+	text-decoration: none;
+	color: #116493;
+	line-height: 50px;
+	display: block;
+	
+}
